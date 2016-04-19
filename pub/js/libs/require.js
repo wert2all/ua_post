@@ -1,1 +1,1 @@
-/home/wert2all/Sync/work/code/php/ua_post/node_modules/requirejs/require.js
+../../../node_modules/requirejs/require.js
