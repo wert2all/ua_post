@@ -5,3 +5,7 @@ node_js:
 #before_script:
 #  - npm install -g gulp
 #script: gulp
+
+notifications:
+    on_success: never
+    on_failure: always
