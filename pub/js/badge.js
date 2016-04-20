@@ -6,10 +6,14 @@ define(["libs/dollardom.min"], function () {
         dataBackground = true,
         _getSelector = function () {
             return "span.mdl-badge" + ( (dataBackground === false) ? ".mdl-badge--no-background" : "" );
+        },
+        _getHashByTitle = function (someString) {
+            return someString.toLowerCase().replace(/[^\da-z]/gi, "");
         };
 
-    function Badge(DomElement) {
+    function Badge(DomElement, hash) {
         var _loaderCount = 1,
+            _hash = hash,
             _dom = DomElement,
             _timeInterval,
 
@@ -38,12 +42,18 @@ define(["libs/dollardom.min"], function () {
         return {
             stopAnimation: function () {
                 clearInterval(_timeInterval);
+                return this;
             },
             startAnimation: function () {
                 _timeInterval = setInterval(_setLoader, 500);
+                return this;
             },
             setValue: function (value) {
                 _setValue(value);
+                return this;
+            },
+            getHash: function () {
+                return _hash;
             },
             getDom: function () {
                 return _dom;
@@ -63,7 +73,7 @@ define(["libs/dollardom.min"], function () {
         build: function () {
             var badgeDOM = $dom.create(_getSelector());
             badgeDOM.appendChild(document.createTextNode(dataTitle));
-            return new Badge(badgeDOM);
+            return new Badge(badgeDOM, _getHashByTitle(dataTitle));
         }
     };
 });

@@ -3,18 +3,20 @@
  */
 requirejs(["libs/material.min"]);
 requirejs(["libs/dollardom.min"]);
-requirejs(["badge"], function (badge) {
 
-    var badgeElement = badge.setTitle("title ")
-        .setBackground(true)
-        .build();
+requirejs(['badge_holder', "badge"], function (budgeHolder, badge) {
 
-    badgeElement.startAnimation();
-    $dom.get("#tracklist")[0].appendChild(badgeElement.getDom());
+    badge.setBackground(true);
 
-    setTimeout(function () {
-        badgeElement.stopAnimation();
-        badgeElement.setValue("+");
-    }, 5000);
-    console.log(badgeElement.getDom());
+    budgeHolder
+        .addBadge(
+            badge.setTitle("First Element")
+                .build()
+                .startAnimation()
+        )
+        .addBadge(
+            badge.setTitle("Second Element")
+                .build()
+                .startAnimation()
+        );
 });
