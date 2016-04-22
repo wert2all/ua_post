@@ -7,6 +7,7 @@ requirejs.config({
     paths: {
         material: 'libs/material.min',
         dollardom: 'libs/dollardom.min',
+        badge: "badge",
         move: 'libs/move.min'
     },
     shim: {
@@ -16,20 +17,24 @@ requirejs.config({
     }
 });
 
-requirejs(["material"]);
-requirejs(['badge_holder', "badge"], function (budgeHolder, badge) {
+requirejs(["material"], function () {
+    // init main site 
 
-    badge.setBackground(true);
+    //FIXME test code
+    requirejs(['badge/holder', "badge/item"], function (budgeHolder, badge) {
 
-    budgeHolder
-        .addBadge(
-            badge.setTitle("First Element")
-                .build()
-                .startAnimation()
-        )
-        .addBadge(
-            badge.setTitle("Second Element")
-                .build()
-                .startAnimation()
-        );
+        badge.setBackground(true);
+
+        budgeHolder
+            .addBadge(
+                badge.setTitle("First Element")
+                    .build()
+                    .startAnimation()
+            )
+            .addBadge(
+                badge.setTitle("Second Element")
+                    .build()
+                    .startAnimation()
+            );
+    });
 });
