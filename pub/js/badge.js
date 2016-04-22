@@ -1,7 +1,8 @@
 /**
  * Created by wert2all on 4/19/16.
  */
-define(["libs/dollardom.min"], function () {
+define(["dollardom"], function (dom) {
+
     var dataTitle = "",
         dataBackground = true,
         _getSelector = function () {
@@ -71,7 +72,7 @@ define(["libs/dollardom.min"], function () {
             return this;
         },
         build: function () {
-            var badgeDOM = $dom.create(_getSelector());
+            var badgeDOM = dom.create(_getSelector());
             badgeDOM.appendChild(document.createTextNode(dataTitle));
             return new Badge(badgeDOM, _getHashByTitle(dataTitle));
         }
