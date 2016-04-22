@@ -1,9 +1,10 @@
 /**
  * Created by wert2all on 4/20/16.
  */
-define(["libs/dollardom.min"], function () {
+define(["dollardom"], function (dom) {
 
     var _viewHolder,
+        _dom = dom,
         _listBadges = [],
         _isBadgeExist = function (badge) {
             return ( typeof _listBadges[badge.getHash()] !== "undefined");
@@ -12,20 +13,20 @@ define(["libs/dollardom.min"], function () {
             _viewHolder.appendChild(badge.getDom());
         },
         _addBadge = function (badge) {
-            var decorator = new BadgeDecorator(badge);
+            var decorator = new BadgeDecorator(badge, _dom);
             _listBadges[decorator.getHash()] = decorator;
             _appendToViewHolder(decorator);
         };
 
-    _viewHolder = $dom.get("#tracklist");
+    _viewHolder = _dom.get("#tracklist");
 
     if (_viewHolder.length !== 1) {
         throw new Error('Bad holder ');
     }
     _viewHolder = _viewHolder[0];
-    
-    function BadgeDecorator(badge) {
-        var _dom = $dom.create("a");
+
+    function BadgeDecorator(badge, dom) {
+        var _dom = dom.create("a");
         _dom.href = "#";
         _dom.addEventListener('click', function () {
             console.log(badge.getHash());
