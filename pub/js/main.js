@@ -8,6 +8,7 @@ requirejs.config({
         material: 'libs/material.min',
         dollardom: 'libs/dollardom.min',
         badge: "badge",
+        action: "action",
         move: 'libs/move.min'
     },
     shim: {
@@ -19,6 +20,10 @@ requirejs.config({
 
 requirejs(["material"], function () {
     // init main site 
+
+    requirejs(['action/action'], function (action) {
+        action.init("")
+    });
 
     //FIXME test code
     requirejs(['badge/holder', "badge/item"], function (budgeHolder, badge) {
